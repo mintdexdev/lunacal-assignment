@@ -11,7 +11,7 @@ const CSS_VARIABLE = {
 
 const CONSTANTS = {
   IMAGE_SIZE: 200,
-  IMAGE_SIZE_PADDING: 216,
+  IMAGE_SIZE_PADDING: 224,
 }
 
 
@@ -45,9 +45,9 @@ export default function App() {
       <div className='w-1/2 flex flex-col gap-5 h-full'>
 
         <Widget>
-          <div className='h-full flex flex-col '>
+          <div className='h-full flex flex-col  py-3 pr-3 min-w-0   '>
 
-            <div className='overflow-x-scroll overflow-y-clip lg:overflow-visible mr-[42px]  bg-[#171717] flex justify-around p-2 rounded-3xl relative lg:w-full  '>
+            <div className='overflow-x-scroll scrollbar-custom overflow-y-clip lg:overflow-visible mr-[42px]  bg-[#171717] flex justify-around p-2 rounded-3xl relative lg:w-full  '>
 
               <div className={`duration-500 ease-out h-[60px] min-w-40  w-[calc(1/3*100%-6px)] bg-[#28292F]  rounded-2xl absolute top-2 left-2 z-2 shadow-[0_16px_48px_16px_rgba(0,0,0,1)]  
                 ${CSS_VARIABLE.translateDistance} `} />
@@ -76,56 +76,59 @@ export default function App() {
         <Divider />
 
         <Widget>
-          <div className='flex flex-col gap-4  lg:flex-row lg:justify-between lg:gap-0'>
-            <div className=' bg-[#171717] px-8  z-3 text-xl py-4 w-fit rounded-2xl text-center duration-300'
-            >
-              Gallery
+          <div className="w-full h-full flex flex-col py-3 pr-3 min-w-0 overflow-clip ">
+            <div className='w-full flex flex-col gap-4  lg:flex-row lg:justify-between lg:gap-0'>
+              <div className='bg-[#171717] px-8 text-xl py-4 rounded-2xl text-center'
+              >
+                Gallery
+              </div>
+
+              <div className='flex min-w-0 items-center gap-2 lg:gap-6'>
+                <button className='whitespace-nowrap text-xl px-6 py-3 rounded-full shadow-[4px_4px_8px_#00000080,-4px_-4px_8px_#ffffff80] hover:bg-white/5 duration-300 ease-out'
+                  onClick={() => { setImages(prev => [...prev, { id: prev.length + 1, link: '/templateImage' }]) }}
+                >
+                  + Add Image
+                </button>
+
+                <button className='aspect-square h-12 bg-neutral-800 text-xl rounded-full shadow-[4px_4px_8px_#00000080,-4px_-4px_8px_#ffffff80] grid place-items-center hover:bg-white/5 duration-300 ease-out'
+                  onClick={() => {
+                    setScrollImageDistance(prev => {
+                      if (prev < 0)
+                        return prev += CONSTANTS.IMAGE_SIZE
+
+                      return prev
+                    })
+                  }}
+                >
+                  <FaArrowLeft />
+                </button>
+
+                <button className='aspect-square h-12 bg-neutral-800  text-xl rounded-full shadow-[4px_4px_8px_#00000080,-4px_-4px_8px_#ffffff80] grid place-items-center hover:bg-white/5 duration-300 ease-out'
+
+                  onClick={() => {
+                    setScrollImageDistance(prev => {
+                      if (-(Images.length - 1) * CONSTANTS.IMAGE_SIZE_PADDING < scrollImageDistance)
+                        return prev -= CONSTANTS.IMAGE_SIZE
+
+                      return prev
+                    })
+                  }}
+                >
+                  <FaArrowRight />
+                </button>
+              </div>
             </div>
 
-            <div className='flex  min-w-0 items-center gap-2 lg:gap-6'>
-              <button className='whitespace-nowrap text-xl px-6 py-3 rounded-full shadow-[4px_4px_8px_#00000080,-4px_-4px_8px_#ffffff80] hover:bg-white/5 duration-300 ease-out'
-                onClick={() => { setImages(prev => [...prev, { id: prev.length + 1, link: '/templateImage' }]) }}
+            <div className='h-full overflow-x-scroll p-4 rounded-2xl z-1 scrollbar-hide relative'>
+              <div className='h-full top-0 left-0 flex gap-4 py-4 lg:py-8 w-fit absolute duration-300 '
+                style={{ transform: `translateX(${scrollImageDistance}px)` }}
               >
-                + Add Image
-              </button>
-
-              <button className='aspect-square h-12 bg-neutral-800 text-xl rounded-full shadow-[4px_4px_8px_#00000080,-4px_-4px_8px_#ffffff80] grid place-items-center hover:bg-white/5 duration-300 ease-out'
-                onClick={() => {
-                  setScrollImageDistance(prev => {
-                    if (prev < 0)
-                      return prev += CONSTANTS.IMAGE_SIZE
-
-                    return prev
-                  })
-                }}
-              >
-                <FaArrowLeft />
-              </button>
-
-              <button className='aspect-square h-12 bg-neutral-800  text-xl rounded-full shadow-[4px_4px_8px_#00000080,-4px_-4px_8px_#ffffff80] grid place-items-center hover:bg-white/5 duration-300 ease-out'
-
-                onClick={() => {
-                  setScrollImageDistance(prev => {
-                    if (-(Images.length - 1) * CONSTANTS.IMAGE_SIZE_PADDING < scrollImageDistance)
-                      return prev -= CONSTANTS.IMAGE_SIZE
-
-                    return prev
-                  })
-                }}
-              >
-                <FaArrowRight />
-              </button>
+                {Images.map((item) => (
+                  <Image key={item.id} />
+                ))}
+              </div>
             </div>
-          </div>
-
-          <div className='overflow-x-scroll p-4 rounded-2xl z-1 scrollbar-hide'>
-            <div className='flex gap-4 py-4 lg:py-8 w-fit '
-              style={{ transform: `translateX(${scrollImageDistance}px)` }}
-            >
-              {Images.map((item) => (
-                <Image key={item.id} />
-              ))}
-            </div>
+        
           </div>
 
         </Widget>

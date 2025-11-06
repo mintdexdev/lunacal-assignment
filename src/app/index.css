@@ -1,27 +1,25 @@
 @import "tailwindcss";
 
 @layer utilities {
-  .scrollbar-custom::-webkit-scrollbar {
-    width: 8px;
-  }
 
   .scrollbar-hide::-webkit-scrollbar {
-    width: 0px;
+    width: 0;
     height: 0;
   }
 
+  .scrollbar-custom::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
   .scrollbar-custom::-webkit-scrollbar-track {
-    background: transparent; /* track color */
+    background: transparent;
     border-radius: 9999px;
   }
 
   .scrollbar-custom::-webkit-scrollbar-thumb {
-    background-image: linear-gradient(to bottom right, #888989 -50%, #4A4E54 150%) ;
+    background-image: linear-gradient(to bottom right, #888989 -50%, #4A4E54 150%);
     border-radius: 9999px;
-  }
-
-  .scrollbar-custom::-webkit-scrollbar-thumb:hover {
-     filter: blur(4px);
   }
 }
 
