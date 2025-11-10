@@ -1,5 +1,3 @@
-import React from 'react'
-
 export default function Button(
   {
     src,
@@ -10,7 +8,7 @@ export default function Button(
 ) {
   return (
     <button
-      className='neomorphism-shadow h-[46px] pl-[26px] pr-5 flex gap-1 items-center justify-center  font-poppins rounded-full whitespace-nowrap bg-[#FFFFFF]/3 duration-300 ease-out hover:bg-white/5 '
+      className='neomorphism-shadow h-[46px] pl-[26px] pr-5 flex gap-1 items-center justify-center  font-poppins rounded-full whitespace-nowrap bg-[#FFFFFF]/3 duration-300 ease-out hover:bg-white/10 active:bg-black/10 '
       type="button"
       {...props}
     >

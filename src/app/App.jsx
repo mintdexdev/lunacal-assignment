@@ -1,38 +1,19 @@
 import { useState } from 'react';
-import { Divider, Image, Widget } from '@/components';
-import Button from '@/components/Button';
-import IconButton from '@/components/IconButton';
+import { Divider, Image, Widget, Button, IconButton } from '@/components';
 
-import leftArrowIcon from '@/assets/icons/left-arrow.svg';
-import rightArrowIcon from '@/assets/icons/right-arrow.svg';
-import addIcon from '@/assets/icons/add.svg';
+import { addIcon, leftArrowIcon, rightArrowIcon } from '@/assets';
 
-// Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
-
-// import required modules
 import { Navigation } from 'swiper/modules';
 
-
+const data = ['About', 'Experience', 'Recommended']
 const dataText = `Hello! I’m Dave, your sales rep here from Salesforce. I’ve been working at this awesome company for 3 years now.`
 const dataText2 = `I was born and raised in Albany, NY& have been living in Santa Carla for the past 10 years my wife Tiffany and my 4 year old twin daughters- Emma and Ella. Both of them are just starting school, so my calender is usually blocked between 9-10 AM. This is a... I was born and raised in Albany, NY& have been living in Santa Carla for the past 10 years my wife Tiffany and my 4 year old twin daughters- Emma and Ella. Both of them are just starting school, so my calender is usually blocked between 9-10 AM. This is a...I was born and raised in Albany, NY& have been living in Santa Carla for the past 10 years my wife Tiffany and my 4 year old twin daughters- Emma and Ella. Both of them are just starting school, so my calender is usually blocked between 9-10 AM. This is a...`
 
-const CSS_VARIABLE = {
-  translateDistance: 0
-};
-
-const CONSTANTS = {
-  IMAGE_SIZE: 200,
-  IMAGE_SIZE_PADDING: 224,
-}
-
-
 export default function App() {
-
-  const [currentTabSelected, setcurrentTabSelected] = useState('About')
+  const [currentTabIndex, setCurrentTabIndex] = useState(0)
   const [Images, setImages] = useState([
     { id: 1, link: '/templateImage.jpg' },
     { id: 2, link: '/templateImage.jpg' },
@@ -40,21 +21,6 @@ export default function App() {
     { id: 4, link: '/templateImage.jpg' },
     { id: 5, link: '/templateImage.jpg' },
   ])
-  const [scrollImageDistance, setScrollImageDistance] = useState(0)
-
-  const tabs = ['About', 'Experience', 'Recommended']
-
-
-  if (currentTabSelected === 'About') {
-    CSS_VARIABLE.translateDistance = 0;
-
-  } else if (currentTabSelected === 'Experience') {
-
-    CSS_VARIABLE.translateDistance = 1;
-
-  } else if (currentTabSelected === 'Recommended') {
-    CSS_VARIABLE.translateDistance = 2;
-  }
 
   return (
     <div className='min-h-screen p-8 flex flex-col-reverse gap-10  items-center  text-white bg-linear-to-b from-[-100%] from-[#373E44] to-[#191B1F]
@@ -66,31 +32,29 @@ export default function App() {
 
       <div className='w-full flex flex-col gap-5 h-full lg:min-w-[640px]  '>
         <Widget >
-          <div className='h-full w-full pr-[17px] pb-6 flex flex-col min-w-0  '>
 
-            <div className='pl-[21px] pr-[39px] pt-[17px]'>
+          <div className='h-full w-full pr-[17px] pb-6 flex flex-col min-w-0  '>
+            <nav className='pl-[21px] pr-[39px] pt-[17px]'>
               <ul className='tab-group-shadow flex p-2 rounded-[23px] relative sscrollbar-custom bg-[#171717] w-full xl:overflow-visible cursor-pointer '>
                 <span className={`selected-tab-shadow  h-[calc(100%-16px)] w-[calc(1/3*100%-6px)] min-w-30 rounded-2xl absolute top-2 left-2 z-2 bg-[#28292F] duration-500 ease-out`}
-                  style={{ transform: `translate(${CSS_VARIABLE.translateDistance * 100}%)` }}
+                  style={{ transform: `translate(${currentTabIndex * 100}%)` }}
                 />
-
-                {tabs.map(tab => (
+                {data.map((tab, index) => (
                   <li className={`w-1/3 whitespace-nowrap z-3 py-4 rounded-2xl text-center text-lg font-medium leading-[16.1px] duration-100 ease-out  
-                  ${tab === currentTabSelected ? 'hover:bg-transparent' : 'tab-hover text-[#A3ADB2] duration-300 relative '}`}
+                  ${tab === data[currentTabIndex] ? 'hover:bg-transparent bg' : 'tab-hover text-[#A3ADB2] duration-300 relative '}`}
                     key={tab}
-                    onClick={() => { setcurrentTabSelected(tab) }}
+                    onClick={() => { setCurrentTabIndex(index) }}
                   >
                     <span className='relative z-1' >{tab}</span>
                   </li>
                 ))}
               </ul>
-            </div>
+            </nav>
 
             <div className='pl-[21px] pr-[35px]  pt-[34px] h-full  max-h-[237px] overflow-y-scroll scrollbar-custom text-xl text-[#969696]'>
               <p> {dataText} </p>
               <p className='mt-4'> {dataText2} </p>
             </div>
-
           </div>
         </Widget>
 
@@ -115,7 +79,6 @@ export default function App() {
                 <IconButton
                   src={leftArrowIcon}
                   id="prevBtn" />
-
                 <IconButton
                   src={rightArrowIcon}
                   id="nextBtn" />
@@ -144,14 +107,10 @@ export default function App() {
 
             </Swiper>
           </div>
-
-
         </Widget>
-
+        
         <Divider />
-
       </div>
-
     </div>
   )
 }

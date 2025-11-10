@@ -1,5 +1,4 @@
-import helpIcon from '@/assets/icons/help.svg';
-import gridIcon from '@/assets/icons/grid.svg';
+import { helpIcon, gridIcon } from '@/assets';
 
 export default function Widget({ children }) {
   return (
