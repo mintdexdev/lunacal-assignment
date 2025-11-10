@@ -3,7 +3,7 @@ import gridIcon from '@/assets/icons/grid.svg';
 
 export default function Widget({ children }) {
   return (
-    <div className='flex rounded-[18.89px] bg-[#363C43] widget-shadow'>
+    <div className=' flex rounded-[18.89px] bg-[#363C43] widget-shadow'>
 
       <div className='shrink-0 py-3 pl-3 grid place-items-center relative '>
 

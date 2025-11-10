@@ -57,14 +57,14 @@ export default function App() {
   }
 
   return (
-    <div className='min-h-screen p-8 flex flex-col-reverse  items-center  text-white bg-linear-to-b from-[-100%] from-[#373E44] to-[#191B1F]
-    lg:flex-row lg:px-7 lg:pt-[98px] lg:pb-[108px] lg:gap-7 '>
+    <div className='min-h-screen p-8 flex flex-col-reverse gap-10  items-center  text-white bg-linear-to-b from-[-100%] from-[#373E44] to-[#191B1F]
+    lg:flex-row lg:gap-7 lg:px-7 xl:pr-22 lg:pt-24 lg:pb-26 xl:gap-9'>
 
-      <div className='w-full self-stretch   p-4 rounded-[27px] border bg-[#616161]/82 border-[#96BEE7] font-poppins text-sm'>
+      <div className='w-full min-h-100 self-stretch p-4 rounded-[27px] border bg-[#616161]/82 border-[#96BEE7] font-poppins text-sm'>
         Empty Space
       </div>
 
-      <div className='w-full flex flex-col gap-5 h-full lg:w-1/2 lg:min-w-[560px]  '>
+      <div className='w-full flex flex-col gap-5 h-full lg:min-w-[640px]  '>
         <Widget >
           <div className='h-full w-full pr-[17px] pb-6 flex flex-col min-w-0  '>
 
