@@ -1,12 +1,27 @@
 import { useState } from 'react';
 import { Divider, Image, Widget } from '@/components';
-import { FaArrowRight, FaArrowLeft } from 'react-icons/fa6';
+import Button from '@/components/Button';
+import IconButton from '@/components/IconButton';
+
+import leftArrowIcon from '@/assets/icons/left-arrow.svg';
+import rightArrowIcon from '@/assets/icons/right-arrow.svg';
+import addIcon from '@/assets/icons/add.svg';
+
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+
+// import required modules
+import { Navigation } from 'swiper/modules';
 
 
-const text = `Hello! I’m Dave, your sales rep here from Salesforce. I’ve been working at this awesome company for 3 years now. I was born and raised in Albany, NY& have been living in Santa Carla for the past 10 years my wife Tiffany and my 4 year old twin daughters- Emma and Ella. Both of them are just starting school, so my calender is usually blocked between 9-10 AM. This is a... Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita quas asperiores illo esse hic repudiandae rem, error ipsum explicabo sunt repellendus eos illum sapiente temporibus alias facere voluptates aut, magni similique non praesentium aliquid tempore cupiditate. Ducimus recusandae odit, excepturi ullam aut error iure! Architecto dignissimos voluptatem esse nihil consequatur quibusdam voluptatibus enim ratione ab hic! Quam provident impedit odit ipsa, culpa velit voluptate tempora neque necessitatibus similique, corrupti reiciendis officia nobis quaerat! Quos possimus error obcaecati exercitationem nulla quia iste doloremque adipisci ipsa dolorum quo vel consequuntur dolorem repellat nobis inventore facere sed aliquam ad, praesentium maiores ex quam voluptate? Nostrum deserunt neque repudiandae, blanditiis recusandae cupiditate veritatis error molestias ea! Inventore autem, iure nulla earum error aliquid assumenda, voluptatum cum repellat consequatur dolor quam esse et nemo nam facere obcaecati, recusandae officiis. Temporibus provident sapiente inventore ad ab? Aperiam ratione suscipit numquam rerum ullam! Eos, sint quia dolorem quam, dolorum laudantium quisquam, hic repellat aliquam ex voluptate ipsam maiores! Fugit ea ad, perferendis eius sequi incidunt aspernatur rerum rem accusantium itaque! Quis odio dicta illum a atque beatae minima magni odit optio iusto error officiis aliquam dignissimos deserunt est voluptas, commodi, non nesciunt. Provident ab esse consectetur soluta?`
+const dataText = `Hello! I’m Dave, your sales rep here from Salesforce. I’ve been working at this awesome company for 3 years now.`
+const dataText2 = `I was born and raised in Albany, NY& have been living in Santa Carla for the past 10 years my wife Tiffany and my 4 year old twin daughters- Emma and Ella. Both of them are just starting school, so my calender is usually blocked between 9-10 AM. This is a... I was born and raised in Albany, NY& have been living in Santa Carla for the past 10 years my wife Tiffany and my 4 year old twin daughters- Emma and Ella. Both of them are just starting school, so my calender is usually blocked between 9-10 AM. This is a...I was born and raised in Albany, NY& have been living in Santa Carla for the past 10 years my wife Tiffany and my 4 year old twin daughters- Emma and Ella. Both of them are just starting school, so my calender is usually blocked between 9-10 AM. This is a...`
 
 const CSS_VARIABLE = {
-  translateDistance: ''
+  translateDistance: 0
 };
 
 const CONSTANTS = {
@@ -19,11 +34,11 @@ export default function App() {
 
   const [currentTabSelected, setcurrentTabSelected] = useState('About')
   const [Images, setImages] = useState([
-    { id: 1, link: '/templateImage' },
-    { id: 2, link: '/templateImage' },
-    { id: 3, link: '/templateImage' },
-    { id: 4, link: '/templateImage' },
-    { id: 5, link: '/templateImage' },
+    { id: 1, link: '/templateImage.jpg' },
+    { id: 2, link: '/templateImage.jpg' },
+    { id: 3, link: '/templateImage.jpg' },
+    { id: 4, link: '/templateImage.jpg' },
+    { id: 5, link: '/templateImage.jpg' },
   ])
   const [scrollImageDistance, setScrollImageDistance] = useState(0)
 
@@ -31,50 +46,49 @@ export default function App() {
 
 
   if (currentTabSelected === 'About') {
-    CSS_VARIABLE.translateDistance = 'translate-0';
+    CSS_VARIABLE.translateDistance = 0;
 
   } else if (currentTabSelected === 'Experience') {
 
-    CSS_VARIABLE.translateDistance = 'translate-x-[100%]';
+    CSS_VARIABLE.translateDistance = 1;
 
   } else if (currentTabSelected === 'Recommended') {
-    CSS_VARIABLE.translateDistance = 'translate-x-[200%]';
+    CSS_VARIABLE.translateDistance = 2;
   }
 
   return (
-    <div className='flex gap-5 p-5 h-screen text-white bg-linear-to-b from-[#282C31] to-[#191B1F] overflow-clip lg:p-10 lg:gap-10'>
+    <div className='min-h-screen p-8 flex flex-col-reverse  items-center  text-white bg-linear-to-b from-[-100%] from-[#373E44] to-[#191B1F]
+    lg:flex-row lg:px-7 lg:pt-[98px] lg:pb-[108px] lg:gap-7 '>
 
-      <div className='w-1/2 shrink-0 grow-0 bg-[#363C43] rounded-3xl'>
+      <div className='w-full self-stretch   p-4 rounded-[27px] border bg-[#616161]/82 border-[#96BEE7] font-poppins text-sm'>
         Empty Space
       </div>
 
-      <div className='w-1/2 grow-0 flex flex-col gap-5 h-full'>
+      <div className='w-full flex flex-col gap-5 h-full lg:w-1/2 lg:min-w-[560px]  '>
         <Widget >
-          <div className='h-full w-full flex flex-col py-3 pr-3 min-w-0  '>
+          <div className='h-full w-full pr-[17px] pb-6 flex flex-col min-w-0  '>
 
-            <div className='pr-[42px]'>
-              <div className='flex p-2 rounded-3xl relative overflow-x-scroll scrollbar-custom overflow-clip  bg-[#171717] w-full xl:overflow-visible '>
-                <div className={`duration-500 ease-out h-[60px] w-[calc(1/3*100%-6px)] min-w-30 bg-[#28292F]  rounded-2xl absolute top-2 left-2 z-2 shadow-[0_16px_48px_16px_rgba(0,0,0,1)]  
-                ${CSS_VARIABLE.translateDistance} `} />
-
+            <div className='pl-[21px] pr-[39px] pt-[17px]'>
+              <ul className='tab-group-shadow flex p-2 rounded-[23px] relative sscrollbar-custom bg-[#171717] w-full xl:overflow-visible cursor-pointer '>
+                <span className={`selected-tab-shadow  h-[calc(100%-16px)] w-[calc(1/3*100%-6px)] min-w-30 rounded-2xl absolute top-2 left-2 z-2 bg-[#28292F] duration-500 ease-out`}
+                  style={{ transform: `translate(${CSS_VARIABLE.translateDistance * 100}%)` }}
+                />
 
                 {tabs.map(tab => (
-                  <button className={`min-w-30 w-1/3 whitespace-nowrap z-3 py-4 rounded-2xl text-center duration-100 ease-out xl:text-xl 
-                  ${tab === currentTabSelected ? 'hover:bg-transparent' : 'duration-300 hover:bg-neutral-50/5  '}`}
-                    type='button'
+                  <li className={`w-1/3 whitespace-nowrap z-3 py-4 rounded-2xl text-center text-lg font-medium leading-[16.1px] duration-100 ease-out  
+                  ${tab === currentTabSelected ? 'hover:bg-transparent' : 'tab-hover text-[#A3ADB2] duration-300 relative '}`}
                     key={tab}
                     onClick={() => { setcurrentTabSelected(tab) }}
                   >
-                    {tab}
-                  </button>
+                    <span className='relative z-1' >{tab}</span>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
 
-            <div className='h-full py-8 overflow-y-scroll scrollbar-custom lg:pr-[42px]'>
-              <p className='text-xl text-[#969696]'>
-                {text}
-              </p>
+            <div className='pl-[21px] pr-[35px]  pt-[34px] h-full  max-h-[237px] overflow-y-scroll scrollbar-custom text-xl text-[#969696]'>
+              <p> {dataText} </p>
+              <p className='mt-4'> {dataText2} </p>
             </div>
 
           </div>
@@ -83,58 +97,55 @@ export default function App() {
         <Divider />
 
         <Widget >
-
-          <div className='w-full py-2 flex flex-col gap-4 xl:pr-[42px]   xl:flex-row xl:justify-between xl:gap-0'>
-            <div className='bg-[#171717] px-8 text-xl py-4 rounded-2xl text-center'
-            >
+          <div className='pl-[21px] mr-[57px] mt-5 flex flex-row justify-between'>
+            <div className='px-[38px] py-4 font-poppins text-xl rounded-[20px]  leading-[30px] bg-[#171717]'>
               Gallery
             </div>
 
-            <div className='flex min-w-0 items-center gap-2 xl:gap-6'>
-              <button className='whitespace-nowrap lg:text-xl px-6 py-3 rounded-full shadow-[4px_4px_8px_#00000080,-4px_-4px_8px_#ffffff80] hover:bg-white/5 duration-300 ease-out'
-                onClick={() => { setImages(prev => [...prev, { id: prev.length + 1, link: '/templateImage' }]) }}
-              >
-                + Add Image
-              </button>
-
-              <button className='aspect-square h-12 bg-neutral-800 text-xl rounded-full shadow-[4px_4px_8px_#00000080,-4px_-4px_8px_#ffffff80] grid place-items-center hover:bg-white/5 duration-300 ease-out'
+            <div className='flex gap-[37px] items-center'>
+              <Button
+                src={addIcon}
                 onClick={() => {
-                  setScrollImageDistance(prev => {
-                    if (prev < 0)
-                      return prev += CONSTANTS.IMAGE_SIZE
-
-                    return prev
-                  })
+                  setImages(prev => [...prev, { id: prev.length + 1, link: '/templateImage.jpg' }])
                 }}
               >
-                <FaArrowLeft />
-              </button>
+                Add Image
+              </Button>
+              <div className='flex gap-[18px]'>
+                <IconButton
+                  src={leftArrowIcon}
+                  id="prevBtn" />
 
-              <button className='aspect-square h-12 bg-neutral-800  text-xl rounded-full shadow-[4px_4px_8px_#00000080,-4px_-4px_8px_#ffffff80] grid place-items-center hover:bg-white/5 duration-300 ease-out'
-
-                onClick={() => {
-                  setScrollImageDistance(prev => {
-                    if (-(Images.length - 2) * CONSTANTS.IMAGE_SIZE_PADDING < scrollImageDistance)
-                      return prev -= CONSTANTS.IMAGE_SIZE
-
-                    return prev
-                  })
-                }}
-              >
-                <FaArrowRight />
-              </button>
+                <IconButton
+                  src={rightArrowIcon}
+                  id="nextBtn" />
+              </div>
             </div>
           </div>
 
-          <div className='h-full overflow-x-scroll p-4 z-1 scrollbar-hide relative lg:mr-[42px]'>
-            <div className='h-full top-0 left-0 flex gap-4 py-4 lg:py-8 w-fit absolute duration-300 '
-              style={{ transform: `translateX(${scrollImageDistance}px)` }}
+          <div className='overflow-x-clip pl-[21px] mr-[57px]'>
+            <Swiper
+              slidesPerView={3}
+              spaceBetween={21}
+              className="mt-[46px] mb-6"
+              style={{ overflow: "visible" }}
+              modules={[Navigation]}
+              navigation={{
+                prevEl: "#prevBtn",
+                nextEl: "#nextBtn",
+              }}
             >
               {Images.map((item) => (
-                <Image key={item.id} />
+                <SwiperSlide className='overflow-visible z-1 hover:z-2'
+                  key={item.id}>
+                  <Image src={item.link} />
+                </SwiperSlide>
               ))}
-            </div>
+
+            </Swiper>
           </div>
+
+
         </Widget>
 
         <Divider />

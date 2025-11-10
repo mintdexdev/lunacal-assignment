@@ -1,6 +1,6 @@
 
 export default function Divider() {
   return (
-    <div className='mx-4 h-1 shrink-0  bg-[#363C43] rounded-full shadow-sm shadow-black' />
+    <hr className='h-1 mx-13.5  border-0 rounded-full bg-[#CCCCCC]/5 bg-linear-to-b from-[#282828]/10 to-[#F8F8F8]/10 divider-shadow' />
   )
 }
